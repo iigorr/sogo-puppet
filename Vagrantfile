@@ -7,9 +7,9 @@ Vagrant::Config.run do |config|
     gw.vm.host_name = "gw.dev"
 
     gw.vm.network :hostonly, "192.168.23.23"
-    config.vm.forward_port 80, 80
+    gw.vm.forward_port 80, 80
 
-    gw.vm.provision  :puppet do  |puppet|
+    gw.vm.provision :puppet do  |puppet|
       puppet.manifests_path = "puppet/vagrant-manifests"
       puppet.manifest_file = "gw.pp"
       puppet.module_path  = "puppet/modules"
@@ -17,8 +17,5 @@ Vagrant::Config.run do |config|
     end
 
   end
-
-
-
 
 end
