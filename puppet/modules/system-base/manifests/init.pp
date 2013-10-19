@@ -1,4 +1,3 @@
-
 class system-base {
   
   exec { "apt-get-init":

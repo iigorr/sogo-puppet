@@ -1,7 +1,6 @@
 
 class system-base::users {
 
-  $username = "igor"
   $password   = '$6$1OK3l7RB$QPsWNzK0A9JnwBn9rGohmp58XPrg6SvKFBLrRXSO30933or6qQjd1D2DZZL/IkpkbqQYjNSyZ/liwCX3qiqVT/'
   user { $username:
     ensure     => "present",
