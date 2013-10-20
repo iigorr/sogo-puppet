@@ -30,4 +30,17 @@ class sogo::install {
     ensure  => installed,
     require => Exec['apt-update-sogo'],
   }
+
+  file {'/etc/sogo/sogo.conf':
+    ensure  => file,
+    owner   => root,
+    group   => root,
+    source  => "puppet:///modules/sogo/sogo.conf",
+    require => Package['sogo'],
+    notify  => Service['sogo'],
+  }
+
+  service {'sogo':
+    ensure  => running,
+  }
 }
