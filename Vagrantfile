@@ -7,6 +7,7 @@ Vagrant::Config.run do |config|
 
   username = 'vagrant'
   password = '$6$aqzOtgCM$OxgoMP4JoqMJ1U1F3MZPo2iBefDRnRCXSfgIM36E5cfMNcE7GcNtH1P/tTC2QY3sX3BxxJ7r/9ciScIVTa55l0'
+  public_key= ''
 
   if yml.has_key?('username')
     username = yml['username']
@@ -15,6 +16,11 @@ Vagrant::Config.run do |config|
   if yml.has_key?('password')
     password = yml['password']
   end
+
+  if yml.has_key?('public_key')
+    public_key = yml['public_key']
+  end
+
 
   config.vm.define "gw" do |gw|
     gw.vm.box = "gw"
@@ -30,7 +36,8 @@ Vagrant::Config.run do |config|
       puppet.facter = { 
         "fqdn" => "box.dev",
         'username' => username,
-        'password' => password
+        'password' => password,
+        'public_key' => public_key
       }
     end
 

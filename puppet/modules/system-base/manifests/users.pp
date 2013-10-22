@@ -1,7 +1,6 @@
 
 class system-base::users {
 
-  $password   = '$6$1OK3l7RB$QPsWNzK0A9JnwBn9rGohmp58XPrg6SvKFBLrRXSO30933or6qQjd1D2DZZL/IkpkbqQYjNSyZ/liwCX3qiqVT/'
   user { $username:
     ensure     => "present",
     shell      => '/bin/bash',
@@ -27,7 +26,7 @@ class system-base::users {
   }
 
   file {"/home/$username/.ssh/authorized_keys":
-    source  => "puppet:///modules/system-base/id_rsa_4096.pub",
+    content => $public_key,
     owner   => $username,
     group   => $username,
     mode    => 600,
