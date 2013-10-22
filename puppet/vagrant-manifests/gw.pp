@@ -1,5 +1,3 @@
-$username = "igor"
-
 include system-base
 include dev-base
 include sogo
