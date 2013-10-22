@@ -1,6 +1,20 @@
+require "yaml"
+
 Vagrant::Config.run do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
+  yml = YAML.load_file "private/user.yml"
+
+  username = 'vagrant'
+  password = '$6$aqzOtgCM$OxgoMP4JoqMJ1U1F3MZPo2iBefDRnRCXSfgIM36E5cfMNcE7GcNtH1P/tTC2QY3sX3BxxJ7r/9ciScIVTa55l0'
+
+  if yml.has_key?('username')
+    username = yml['username']
+  end
+
+  if yml.has_key?('password')
+    password = yml['password']
+  end
 
   config.vm.define "gw" do |gw|
     gw.vm.box = "gw"
@@ -13,7 +27,11 @@ Vagrant::Config.run do |config|
       puppet.manifests_path = "puppet/vagrant-manifests"
       puppet.manifest_file = "gw.pp"
       puppet.module_path  = "puppet/modules"
-      puppet.facter = { "fqdn" => "gw.dev" }
+      puppet.facter = { 
+        "fqdn" => "box.dev",
+        'username' => username,
+        'password' => password
+      }
     end
 
   end
