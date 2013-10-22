@@ -12,3 +12,4 @@ Here is how to setup your own SOGo vbox:
 1. `cd sogo-puppet`
 1. `vagrant up`
 
+That's it.
